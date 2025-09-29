@@ -1,0 +1,166 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Fundo com imagem */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('img/e4541c07-8b75-4c51-8460-61737209acf5.png') no-repeat center center/cover;
+    overflow: hidden;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(218, 165, 32, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 50%;
+    filter: blur(120px);
+}
+
+/* Container do login/cadastro */
+.login-container {
+    background: #0c0c0c;
+    padding: 50px 40px;
+    border-radius: 20px;
+    width: 350px;
+    max-width: 90%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 30px 15px rgba(218, 165, 32, 0.4);
+    transition: box-shadow 0.3s ease;
+    opacity: 0.9;
+}
+
+.login-container:hover {
+    box-shadow: 0 0 60px 25px rgba(218, 165, 32, 0.9);
+}
+
+/* Logo */
+.login-logo {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Título */
+.login-container h2 {
+    color: #daa520;
+    margin-bottom: 30px;
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+/* Campos de entrada */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #daa520;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #daa520;
+    border-radius: 12px;
+    background: #1c1c1c;
+    color: #fff;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #ffd700;
+    box-shadow: 0 0 10px #ffd700;
+    color: #bfa76a;
+    background: #1c1c1c;
+    outline: none;
+}
+
+/* Botão principal */
+button {
+    width: 100%;
+    padding: 17px;
+    background: #daa520;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(218, 165, 32, 0.5);
+    margin-top: 15px;
+}
+
+button:hover {
+    background: #ffd700;
+    box-shadow: 0 0 20px #ffd700;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Mensagem de erro */
+.error {
+    min-height: 20px;
+    margin-top: 15px;
+    color: #ff4c4c;
+    font-weight: bold;
+    text-align: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.error.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Link discreto de login */
+.cadastro-text {
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.cadastro-text a {
+    color: #daa520;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.cadastro-text a:hover {
+    color: #ffd700;
+    text-decoration: underline;
+}

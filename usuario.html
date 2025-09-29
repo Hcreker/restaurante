@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tela do Usuário</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-box">
+    <h1>Bem-vindo, Usuário 👤</h1>
+    <p>Você está na tela do usuário.</p>
+    <a href="index.html" onclick="localStorage.removeItem('logado')">
+      <button>Sair</button>
+    </a>
+  </div>
+
+  <script>
+    // Impede acesso sem login
+    if (localStorage.getItem("logado") !== "usuario") {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
