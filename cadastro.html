@@ -6,34 +6,35 @@
   <title>Cadastro</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="hidden">
+<body>
   <div class="login-container">
     <img src="img/image.png" alt="Logo" class="login-logo">
     <h2>CADASTRO</h2>
 
-    <form id="cadastroForm">
+    <form id="cadastroForm" novalidate autocomplete="off">
       <div class="input-group">
         <label for="username">Usuário</label>
-        <input type="text" id="username" required placeholder="Digite seu usuário">
+        <input type="text" id="username" placeholder="Digite seu usuário" autocomplete="off">
       </div>
 
       <div class="input-group">
         <label for="password">Senha</label>
-        <input type="password" id="password" required placeholder="Digite sua senha">
+        <input type="password" id="password" placeholder="Digite sua senha" autocomplete="new-password">
       </div>
 
       <div class="input-group">
         <label for="confirmPassword">Confirmar Senha</label>
-        <input type="password" id="confirmPassword" required placeholder="Repita sua senha">
+        <input type="password" id="confirmPassword" placeholder="Repita sua senha" autocomplete="new-password">
       </div>
 
       <button type="submit">Cadastrar</button>
+
+      <p class="cadastro-text">
+        Já tem uma conta? <a href="index.html">Faça login</a>
+      </p>
+
       <p id="error" class="error"></p>
     </form>
-
-    <p class="cadastro-text">
-      Já tem uma conta? <a href="index.html">Faça login</a>
-    </p>
   </div>
 
   <script src="cadastro.js"></script>

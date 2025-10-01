@@ -1,49 +1,51 @@
-document.getElementById("loginForm").addEventListener("submit", function(e) {
+const loginForm = document.getElementById("loginForm");
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const errorMsg = document.getElementById("error");
+let errorTimeout;
+
+// Funções de erro
+function showError(message) {
+  errorMsg.textContent = message;
+  errorMsg.classList.add("show");
+  if (errorTimeout) clearTimeout(errorTimeout);
+  errorTimeout = setTimeout(hideError, 3000);
+}
+
+function hideError() {
+  errorMsg.textContent = "";
+  errorMsg.classList.remove("show");
+}
+
+// Limpar erro ao digitar
+[usernameInput, passwordInput].forEach(input => {
+  input.addEventListener("input", hideError);
+});
+
+// Validação do submit
+loginForm.addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const errorMsg = document.getElementById("error");
+  const username = usernameInput.value.trim();
+  const password = passwordInput.value.trim();
 
-  let errorTimeout; // controla o tempo para esconder o erro
-
-  // Função para mostrar erro
-  function showError(message) {
-    errorMsg.textContent = message;
-    errorMsg.classList.add("show");
-
-    // Limpa timeout anterior (se houver)
-    if (errorTimeout) clearTimeout(errorTimeout);
-
-    // Esconde automaticamente após 3 segundos
-    errorTimeout = setTimeout(() => {
-      hideError();
-    }, 3000);
+  // Se algum campo estiver vazio
+  if (!username || !password) {
+    showError("Por favor, preencha todos os campos!");
+    return;
   }
 
-  // Função para esconder erro
-  function hideError() {
-    errorMsg.textContent = "";
-    errorMsg.classList.remove("show");
-  }
-
-  // Redefine erro ao digitar novamente
-  document.getElementById("username").addEventListener("input", hideError);
-  document.getElementById("password").addEventListener("input", hideError);
-
-  // Login de usuário
+  // Login correto
   if (username === "usuario123" && password === "123") {
-    hideError();
     localStorage.setItem("logado", "usuario");
     window.location.href = "usuario.html";
 
-  // Login de cozinheiro
   } else if (username === "cozinheiro123" && password === "456") {
-    hideError();
     localStorage.setItem("logado", "cozinheiro");
     window.location.href = "cozinheiro.html";
 
   } else {
+    // Usuário ou senha incorretos
     showError("Usuário ou senha incorretos!");
   }
 });

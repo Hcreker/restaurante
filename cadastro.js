@@ -1,14 +1,16 @@
-const form = document.getElementById("cadastroForm");
+const cadastroForm = document.getElementById("cadastroForm");
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const confirmPasswordInput = document.getElementById("confirmPassword");
 const errorMsg = document.getElementById("error");
 let errorTimeout;
 
+// Funções de erro
 function showError(message) {
   errorMsg.textContent = message;
   errorMsg.classList.add("show");
   if (errorTimeout) clearTimeout(errorTimeout);
-  errorTimeout = setTimeout(() => {
-    hideError();
-  }, 3000);
+  errorTimeout = setTimeout(hideError, 3000);
 }
 
 function hideError() {
@@ -16,38 +18,43 @@ function hideError() {
   errorMsg.classList.remove("show");
 }
 
-form.addEventListener("submit", function(e) {
-  e.preventDefault();
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const confirmPassword = document.getElementById("confirmPassword").value.trim();
+// Limpar erro ao digitar
+[usernameInput, passwordInput, confirmPasswordInput].forEach(input => {
+  input.addEventListener("input", hideError);
+});
 
+// Validação do submit
+cadastroForm.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const username = usernameInput.value.trim();
+  const password = passwordInput.value.trim();
+  const confirmPassword = confirmPasswordInput.value.trim();
+
+  // 1️⃣ Checar se algum campo está vazio
+  if (!username || !password || !confirmPassword) {
+    showError("Por favor, preencha todos os campos!");
+    return;
+  }
+
+  // 2️⃣ Checar se as senhas coincidem
   if (password !== confirmPassword) {
     showError("As senhas não coincidem!");
     return;
   }
 
-  if (!username || !password) {
-    showError("Preencha todos os campos!");
-    return;
-  }
-
-  // Salvar usuário no localStorage
+  // 3️⃣ Checar se usuário já existe
   const users = JSON.parse(localStorage.getItem("users") || "[]");
   if (users.some(u => u.username === username)) {
     showError("Usuário já existe!");
     return;
   }
 
+  // 4️⃣ Salvar usuário e logar automaticamente
   users.push({ username, password });
   localStorage.setItem("users", JSON.stringify(users));
-  localStorage.setItem("logado", username); // loga automaticamente
+  localStorage.setItem("logado", username);
 
-  // Redireciona para tela de usuário
+  // 5️⃣ Redirecionar para tela de usuário
   window.location.href = "usuario.html";
 });
-
-// Limpar erro ao digitar
-document.getElementById("username").addEventListener("input", hideError);
-document.getElementById("password").addEventListener("input", hideError);
-document.getElementById("confirmPassword").addEventListener("input", hideError);
